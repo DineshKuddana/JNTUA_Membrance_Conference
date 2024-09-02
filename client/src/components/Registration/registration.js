@@ -315,7 +315,7 @@ function App() {
               </td>
               <td>
                 {item.bankAcknowledgement ? (
-                  <a href={`https://jntua-membrance-conference.onrender.com/${item.bankAcknowledgement}`} target="_blank" rel="noopener noreferrer">View</a>
+                  <a href={`https://jntua-membrance-conference.onrender.com/files/${item.bankAcknowledgement}`} target="_blank" rel="noopener noreferrer">View</a>
                 ) : (
                   "No File"
                 )}
