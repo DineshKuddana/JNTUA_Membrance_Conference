@@ -1,21 +1,15 @@
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const multer = require("multer");
-const path = require('path');
-const app = express();
 
-require('dotenv').config();
-
-
-// Middleware
 app.use(express.json());
 app.use(cors());
-app.use(express.static('public'));
-app.use('/files', express.static(path.join(__dirname, 'files')));
+app.use("/files", express.static("files"));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://dspcoder123:Dinesh%40123@cluster524.xavl3.mongodb.net/MyDatabase?retryWrites=true&w=majority&appName=Cluster524", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to Database"))
   .catch((e) => console.log("Error connecting to MongoDB: ", e));
 
@@ -26,7 +20,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now();
-    cb(null, uniqueSuffix + path.extname(file.originalname));
+    cb(null, uniqueSuffix + file.originalname);
   },
 });
 
@@ -81,15 +75,15 @@ app.post("/upload-files", upload.fields([{ name: 'abstractFile' }, { name: 'bank
     paymentMode: req.body.paymentMode,
     paymentReferenceId: req.body.paymentReferenceId,
     transactionDate: req.body.transactionDate,
-    abstractFile: req.files['abstractFile'] ? req.files['abstractFile'][0].filename : null,
-    bankAcknowledgement: req.files['bankAcknowledgement'] ? req.files['bankAcknowledgement'][0].filename : null,
+    abstractFile: req.files['abstractFile'][0].filename,
+    bankAcknowledgement: req.files['bankAcknowledgement'][0].filename,
   };
 
   try {
     await PdfSchema.create(formData);
     res.send({ status: "Ok" });
   } catch (error) {
-    res.status(500).json({ status: error.message });
+    res.json({ status: error.message });
   }
 });
 
@@ -99,10 +93,13 @@ app.get("/get-files", async (req, res) => {
     const data = await PdfSchema.find({});
     res.send({ status: "Ok", data });
   } catch (error) {
-    res.status(500).json({ status: error.message });
+    res.json({ status: error.message });
   }
 });
 
 // Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(5000, () => {
+  console.log("Server Started on port 5000");
+});
+
+
