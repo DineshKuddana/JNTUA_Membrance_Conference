@@ -237,13 +237,13 @@ function App() {
 
         {/* Abstract File */}
         <div>
-          <label>Abstract File: (Only Pdf Files)</label>
+          <label>Abstract File:</label>
           <input type="file" name="abstractFile" onChange={handleFormChange} style={{ margin: "8px 0" }} />
         </div>
 
         {/* Bank Acknowledgement */}
         <div>
-          <label>Bank Acknowledgement: (Only image extensions)</label>
+          <label>Bank Acknowledgement:</label>
           <input type="file" name="bankAcknowledgement" onChange={handleFormChange} style={{ margin: "8px 0" }} />
         </div>
 
@@ -320,12 +320,13 @@ function App() {
                   "No File"
                 )}
               </td>
-            </tr> 
+            </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
+  
   
   return (
     <div className="App">
