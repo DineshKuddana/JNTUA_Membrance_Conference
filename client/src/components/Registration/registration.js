@@ -37,7 +37,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const result = await axios.get("http://localhost:5000/get-files");
+      const result = await axios.get("https://jntua-membrance-conference.onrender.com/get-files");
       if (result.data.status === "Ok") {
         setData(result.data.data);
       } else {
@@ -64,7 +64,7 @@ function App() {
     });
 
     try {
-      const result = await axios.post("http://localhost:5000/upload-files", formData, {
+      const result = await axios.post("https://jntua-membrance-conference.onrender.com/upload-files", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       if (result.data.status === "Ok") {
@@ -306,14 +306,14 @@ function App() {
               <td>{item.transactionDate}</td>
               <td>
                 {item.abstractFile ? (
-                  <a href={`http://localhost:5000/files/${item.abstractFile}`} target="_blank" rel="noopener noreferrer">View</a>
+                  <a href={`https://jntua-membrance-conference.onrender.com/files/${item.abstractFile}`} target="_blank" rel="noopener noreferrer">View</a>
                 ) : (
                   "No File"
                 )}
               </td>
               <td>
                 {item.bankAcknowledgement ? (
-                  <a href={`http://localhost:5000/files/${item.bankAcknowledgement}`} target="_blank" rel="noopener noreferrer">View</a>
+                  <a href={`https://jntua-membrance-conference.onrender.com/${item.bankAcknowledgement}`} target="_blank" rel="noopener noreferrer">View</a>
                 ) : (
                   "No File"
                 )}
