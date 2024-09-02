@@ -6,7 +6,10 @@ const multer = require("multer");
 
 app.use(express.json());
 app.use(cors());
-app.use("/files", express.static("files"));
+const path = require('path');
+
+app.use('/files', express.static(path.join(__dirname, 'files')));
+
 
 // MongoDB Connection
 mongoose.connect("mongodb+srv://dspcoder123:Dinesh%40123@cluster524.xavl3.mongodb.net/MyDatabase?retryWrites=true&w=majority&appName=Cluster524", { useNewUrlParser: true, useUnifiedTopology: true })
