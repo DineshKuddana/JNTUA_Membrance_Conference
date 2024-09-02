@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./registration.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const [activeTab, setActiveTab] = useState("form");
