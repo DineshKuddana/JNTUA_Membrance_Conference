@@ -1,0 +1,34 @@
+# Node.js modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Dependency versions
+package-lock.json
+yarn.lock
+
+# Optional npm cache directory
+.npm/
+
+# Local environment variables
+.env
+
+# Vercel build output
+.vercel/
+
+# Build output directories
+dist/
+build/
+
+# Miscellaneous
+.DS_Store
+*.swp

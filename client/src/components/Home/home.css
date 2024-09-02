@@ -1,0 +1,221 @@
+
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+   
+    margin: 0 auto;
+    box-sizing: border-box; 
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  
+  .conference-details {
+    margin-bottom: 30px;
+    max-width: 1200px;
+  }
+  
+  .conference-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .conference-subtitle {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  .conference-date,
+  .conference-location {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .image-section {
+    margin-bottom: 30px;
+  }
+  
+  .college-image {
+    max-width: 100%;
+    width: 1000px;
+    height: 500px; 
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .download-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .download-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .about-conference {
+    margin-bottom: 30px;
+    max-width: 100%; 
+     max-width: 1200px;
+  }
+  
+  .about-conference p {
+    word-spacing: 15px;
+    text-align: justify;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  
+  .topics {
+    margin-bottom: 30px;
+     max-width: 1200px;
+  }
+  
+  .topics-table {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    gap: 15px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .topic {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .topic h4 {
+    margin-top: 0;
+    color: #007bff;
+  }
+  
+  .important-dates {
+    margin-bottom: 30px;
+  }
+  
+  .dates-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  
+  .dates-table th,
+  .dates-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .dates-table th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .organizers-info {
+    margin-bottom: 30px;
+  }
+  
+  .organizers-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .organizer-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .organizer-card h4 {
+    margin-top: 0;
+    color: #007bff;
+  }
+  
+  .address-section {
+    text-align: center;
+  }
+  
+  .address-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .college-logo {
+    max-width: 100px;
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .topics-table {
+      grid-template-columns: 1fr;
+    }
+    .home-container{
+        padding: 10px;
+    }
+
+    .about-conference{
+        padding: 20px;
+    }
+
+    .college-image{
+        width: 400px;
+        height: 300px;
+    }
+  }
+  
+
+
+
+.footer {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    width: 1800px;
+  }
+
+  footer p{
+    margin: auto;
+  }
+  
+
+  
