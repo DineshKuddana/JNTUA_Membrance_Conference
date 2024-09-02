@@ -320,7 +320,7 @@ function App() {
                   "No File"
                 )}
               </td>
-            </tr>
+            </tr> 
           ))}
         </tbody>
       </table>
