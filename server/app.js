@@ -7,6 +7,8 @@ const multer = require("multer");
 app.use(express.json());
 app.use(cors());
 const path = require('path');
+app.use(express.static('public')); 
+
 
 app.use('/files', express.static(path.join(__dirname, 'files')));
 
