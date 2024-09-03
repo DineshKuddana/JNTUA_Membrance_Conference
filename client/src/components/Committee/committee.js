@@ -8,12 +8,13 @@ const Committee = () => {
 
       <div className="committee-section">
         <h3 className="committee-title">Executive Committee</h3>
-        <div className="executive-committee">
-          <div className="executive-member">
+        <div className="executive-member">
             <h4>Chairman</h4>
             <p>Prof. H. Sudarsana Rao</p>
             <p>Vice-Chancellor i/c, JNTUA Ananthapuramu</p>
           </div>
+        <div className="executive-committee">
+          
           <div className="executive-member">
             <h4>Patron</h4>
             <p>Prof. S. Krishnaiah</p>
