@@ -95,11 +95,11 @@ const Navbar = () => {
               </Link>
             </div>
           </li>
-          {/* <li className="nav-item">
+          <li className="nav-item">
             <Link className={getNavLinkClass("/admin")} to="/admin">
               Admin
             </Link>
-          </li> */}
+          </li>
         </ul>
       </div>
     </nav>
