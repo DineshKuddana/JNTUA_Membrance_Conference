@@ -1,122 +1,106 @@
-/* App.css */
-
+/* Form container styling */
 .App {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-}
-
-.table-display{
-    overflow: auto;
-}
-
-nav {
     display: flex;
     justify-content: center;
-    background-color: #333;
-    color: white;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    background-color: #f0f2f5; /* Light background color for the container */
 }
 
-button {
-    margin: 0 10px;
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-
-
-button:hover {
-    background-color: #555;
-}
-
-.table-container {
-    overflow-x: auto;
-    margin: 20px 0;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #f7f9fc;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-
-th {
-    background-color: #4CAF50;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:hover {
-    background-color: #ddd;
-}
-
-form {
-    background-color: #f7f9fc;
-    padding: 20px;
+/* Form styling */
+form.formStyle {
+    background-color: #ffffff; /* White background for the form */
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    align-items: center;
+    max-width: 800px; /* Maximum width for larger screens */
+    width: 100%; /* Full width for smaller screens */
+    margin: 20px; /* Margin for spacing */
+    display: flex;
+    flex-direction: column;
 }
 
+/* Heading styling */
+form h4 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Label styling */
 form label {
     display: block;
     margin: 10px 0 5px;
+    color: #333;
 }
 
+/* Input and select styling */
 form input[type="text"],
 form input[type="email"],
 form input[type="date"],
 form select {
-    width: 50%;
-    padding: 8px;
+    width: 100%;
+    max-width: 100%; /* Ensure inputs fit within the form container */
+    padding: 10px;
     margin: 8px 0;
     border-radius: 4px;
     border: 1px solid #ccc;
 }
 
+/* File input styling */
 form input[type="file"] {
-    width: calc(50% - 16px);
-    padding: 8px;
+    width: 100%;
     margin: 8px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
 }
 
+/* Radio button styling */
 form input[type="radio"] {
     margin-right: 5px;
 }
 
+/* Grouping for radio buttons */
 form .gender-group {
     margin: 10px 0;
 }
 
+/* Styling for radio button labels */
 form .gender-group label {
     margin-right: 15px;
+    color: #333;
 }
 
+/* Button styling */
 form button {
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
 }
 
 form button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    form {
+        padding: 20px;
+        margin: 10px;
+    }
 
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="date"],
+    form select {
+        padding: 8px;
+    }
+
+    form button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}

@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "./registration.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 function App() {
-  const [activeTab, setActiveTab] = useState("form");
-  const [data, setData] = useState([]);
   const [formState, setFormState] = useState({
     prefix: "",
     firstName: "",
@@ -31,25 +28,6 @@ function App() {
     bankAcknowledgement: null,
   });
 
-  useEffect(() => {
-    if (activeTab === "display") {
-      fetchData();
-    }
-  }, [activeTab]);
-
-  const fetchData = async () => {
-    try {
-      const result = await axios.get("https://jntua-membrance-conference.onrender.com/get-files");
-      if (result.data.status === "Ok") {
-        setData(result.data.data);
-      } else {
-        alert("Error fetching data: " + result.data.status);
-      }
-    } catch (error) {
-      alert("An unexpected error occurred: " + error.message);
-    }
-  };
-
   const handleFormChange = (e) => {
     const { name, value, type, files } = e.target;
     setFormState((prevState) => ({
@@ -60,15 +38,20 @@ function App() {
 
   const submitForm = async (e) => {
     e.preventDefault();
+
+    // Create FormData instance
     const formData = new FormData();
     Object.keys(formState).forEach((key) => {
       formData.append(key, formState[key]);
     });
 
     try {
+      console.log("Submitting form data:", formData);
       const result = await axios.post("https://jntua-membrance-conference.onrender.com/upload-files", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+      console.log("Response data:", result.data);
+
       if (result.data.status === "Ok") {
         alert("Form submitted successfully!");
         setFormState({
@@ -99,11 +82,12 @@ function App() {
         alert("Error submitting form: " + result.data.status);
       }
     } catch (error) {
+      console.error("Submission error:", error);
       alert("An unexpected error occurred: " + error.message);
     }
   };
 
-  const renderForm = () => (
+  return (
     <div className="App">
       <form className="formStyle" onSubmit={submitForm} style={{ color: "#333", backgroundColor: "#f7f9fc", padding: "20px", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)" }}>
         <h4 style={{ textAlign: "center", marginBottom: "20px" }}>Registration Form</h4>
@@ -238,107 +222,20 @@ function App() {
         {/* Abstract File */}
         <div>
           <label>Abstract File:</label>
-          <input type="file" name="abstractFile" onChange={handleFormChange} style={{ margin: "8px 0" }} />
+          <input type="file" name="abstractFile" onChange={handleFormChange} required style={{ padding: "8px", margin: "8px 0" }} />
         </div>
 
         {/* Bank Acknowledgement */}
         <div>
           <label>Bank Acknowledgement:</label>
-          <input type="file" name="bankAcknowledgement" onChange={handleFormChange} style={{ margin: "8px 0" }} />
+          <input type="file" name="bankAcknowledgement" onChange={handleFormChange} required style={{ padding: "8px", margin: "8px 0" }} />
         </div>
 
         {/* Submit Button */}
-        <button type="submit" style={{ padding: "10px 20px", backgroundColor: "#007bff", color: "#fff", border: "none", borderRadius: "4px", cursor: "pointer" }}>
-          Submit
-        </button>
+        <div>
+          <button type="submit" style={{ backgroundColor: "#007bff", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "4px" }}>Submit</button>
+        </div>
       </form>
-    </div>
-  );
-
-  const renderTable = () => (
-    <div className="table-display">
-      <h4 style={{ textAlign: "center", marginBottom: "20px" }}>Submitted Forms</h4>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th>Prefix</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gender</th>
-            <th>Designation</th>
-            <th>Department</th>
-            <th>Affiliation</th>
-            <th>Street Address</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Postal Code</th>
-            <th>Country</th>
-            <th>Mobile Number</th>
-            <th>Email</th>
-            <th>Abstract Title</th>
-            <th>Amount Paid</th>
-            <th>Payment Mode</th>
-            <th>Payment Reference ID</th>
-            <th>Transaction Date</th>
-            <th>Abstract File</th>
-            <th>Bank Acknowledgement</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td>{item.prefix}</td>
-              <td>{item.firstName}</td>
-              <td>{item.lastName}</td>
-              <td>{item.gender}</td>
-              <td>{item.designation}</td>
-              <td>{item.department}</td>
-              <td>{item.affiliation}</td>
-              <td>{item.streetAddress}</td>
-              <td>{item.city}</td>
-              <td>{item.state}</td>
-              <td>{item.postalCode}</td>
-              <td>{item.country}</td>
-              <td>{item.mobileNumber}</td>
-              <td>{item.email}</td>
-              <td>{item.abstractTitle}</td>
-              <td>{item.amountPaid}</td>
-              <td>{item.paymentMode}</td>
-              <td>{item.paymentReferenceId}</td>
-              <td>{item.transactionDate}</td>
-              <td>
-                {item.abstractFile ? (
-                  <a href={`https://jntua-membrance-conference.onrender.com/files/${item.abstractFile}`} target="_blank" rel="noopener noreferrer">View</a>
-                ) : (
-                  "No File"
-                )}
-              </td>
-              <td>
-                {item.bankAcknowledgement ? (
-                  <a href={`https://jntua-membrance-conference.onrender.com/files/${item.bankAcknowledgement}`} target="_blank" rel="noopener noreferrer">View</a>
-                ) : (
-                  "No File"
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-  
-  
-  return (
-    <div className="App">
-      <nav style={{ marginBottom: "20px" }}>
-        <button onClick={() => setActiveTab("form")} style={{ padding: "10px 20px", margin: "0 5px", borderRadius: "4px", border: "none", backgroundColor: "#007bff", color: "#fff" }}>
-          Form
-        </button>
-        <button onClick={() => setActiveTab("display")} style={{ padding: "10px 20px", margin: "0 5px", borderRadius: "4px", border: "none", backgroundColor: "#007bff", color: "#fff" }}>
-          Display
-        </button>
-      </nav>
-      {activeTab === "form" ? renderForm() : renderTable()}
     </div>
   );
 }
