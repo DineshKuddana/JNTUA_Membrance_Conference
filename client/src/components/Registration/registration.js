@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./registration.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import qrImage from '../../images/qr.png';
+// import qrImage from '../../images/qr.png';
 
 function App() {
   const [formState, setFormState] = useState({
@@ -237,7 +237,8 @@ function App() {
           <button type="submit" style={{ backgroundColor: "#007bff", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "4px" }}>Submit</button>
         </div>
       </form>
-      <img src={qrImage} alt="QRimage" className="qr-image" />
+      <img src={`${process.env.PUBLIC_URL}/qr.png`} alt="QRimage" className="qr-image" />
+
     </div>
     
   );
