@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./registration.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import QRImage from '../../images/QR.png';
+import QRImage from '../../images/qr.png';
 
 function App() {
   const [formState, setFormState] = useState({
