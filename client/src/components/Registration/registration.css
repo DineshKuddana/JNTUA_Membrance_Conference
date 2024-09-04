@@ -107,8 +107,9 @@ form button:hover {
 
 
 .qr-image {
-    width: 30%; 
+    width: 500px; 
     height: 40rem;
     margin-left: 20px;
     align-self: flex-start; 
+    display: block;
 }

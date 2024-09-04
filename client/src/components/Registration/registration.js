@@ -237,7 +237,7 @@ function App() {
           <button type="submit" style={{ backgroundColor: "#007bff", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "4px" }}>Submit</button>
         </div>
       </form>
-      <img src={`${process.env.PUBLIC_URL}/qr.png`} alt="QRimage" className="qr-image" />
+      <img src="/qr.png" alt="QRimage" className="qr-image" />
 
     </div>
     
