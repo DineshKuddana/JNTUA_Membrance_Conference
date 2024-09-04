@@ -46,9 +46,44 @@ const Navbar = () => {
               About
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className={getNavLinkClass("/committees")} to="/committees">
+          <li className="nav-item dropdown">
+            <a
+              className="nav-link dropdown-toggle"
+              href="#registration"
+              id="navbarDropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               Committees
+            </a>
+            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <Link
+                className={getNavLinkClass("/committees")}
+                to="/committees"
+              >
+                Committee
+              </Link>
+              <Link
+                className={getNavLinkClass("/committee/local")}
+                to="/committee/local"
+              >
+                Local Committee
+              </Link>
+
+
+              <Link
+                className={getNavLinkClass("/committee/nac")}
+                to="/committee/nac"
+              >
+                National Advisory Committee
+              </Link>
+            </div>
+          </li>
+
+          <li className="nav-item">
+            <Link className={getNavLinkClass("/sponsors")} to="/sponsors">
+              Sponsors
             </Link>
           </li>
           <li className="nav-item dropdown">

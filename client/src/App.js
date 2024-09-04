@@ -11,6 +11,9 @@ import PaymentDetails from "../src/components/PaymentDetails/details";
 import RegForm from "../src/components/Registration/registration";
 import AdminLogin from "../src/components/Admin/AdminLogin";
 import AdminConsole from "../src/components/Admin/AdminConsole";
+import NAC from '../src/components/NAC/nac'
+import Local from '../src/components/Local/local';
+import Sponsors from '../src/components/Sponsors/sponsors';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -36,7 +39,10 @@ function App() {
         <Route path="/committees" element={<Committees />} />
         <Route path="/registration/process" element={<PaymentDetails />} />
         <Route path="/registration/form" element={<RegForm />} />
-        
+        <Route path="/committee/nac" element={<NAC />} />
+        <Route path="/committee/local" element={<Local />} />
+        <Route path="/sponsors" element={<Sponsors />} />
+
         
         {/* Admin Routes */}
         <Route

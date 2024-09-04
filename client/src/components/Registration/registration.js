@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./registration.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import QRImage from '../../images/SBI_QR.jpg';
 
 function App() {
   const [formState, setFormState] = useState({
@@ -236,7 +237,9 @@ function App() {
           <button type="submit" style={{ backgroundColor: "#007bff", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "4px" }}>Submit</button>
         </div>
       </form>
+      <img src={QRImage} alt="" className="qr-image" />
     </div>
+    
   );
 }
 

@@ -124,6 +124,9 @@ const Home = () => {
           <div className="organizer-card">
             <h4>Department of Chemical Engineering</h4><br></br>
             <p>JNTUA College of Engineering <br></br>Ananthapuramu, India</p>
+            <a href="https://www.jntuacea.ac.in/" target="_blank" rel="noopener noreferrer">
+            https://www.jntuacea.ac.in/
+            </a>
           </div>
 
           <div className="address-card">

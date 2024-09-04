@@ -104,3 +104,11 @@ form button:hover {
         font-size: 14px;
     }
 }
+
+
+.qr-image {
+    width: 30%; 
+    height: 40rem;
+    margin-left: 20px;
+    align-self: flex-start; 
+}
