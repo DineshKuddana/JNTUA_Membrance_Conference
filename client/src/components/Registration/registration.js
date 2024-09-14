@@ -236,6 +236,18 @@ function App() {
         <div>
           <button type="submit" style={{ backgroundColor: "#007bff", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "4px" }}>Submit</button>
         </div>
+
+        {/* Instructions */}
+        <div style={{ marginTop: "20px", color: "#dc3545", fontWeight: "bold" }}>
+          <p>Please note the following before submitting the form:</p>
+          <ul>
+            <li>The <strong>Bank Acknowledgement</strong> file should be in <strong>.jpg</strong> or <strong>.jpeg</strong> format and the file size should be less than <strong>1 MB</strong>.</li>
+            <li>The <strong>Abstract File</strong> should be in <strong>.pdf</strong> format and the file size should be less than <strong>1 MB</strong>.</li>
+            <li>Files that do not meet the specified formats or size limits may not be processed correctly, even if the form is submitted.</li>
+          </ul>
+        </div>
+
+        
       </form>
       <img src="/qr.png" alt="QRimage" className="qr-image" />
 
