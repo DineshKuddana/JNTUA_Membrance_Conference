@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
-        <img src={collegelogo} alt="college-logo" width="80px" height="80px" />
+        <img src={collegelogo} alt="college-logo" width="95px" height="90px" />
       </Link>
       <button
         className="navbar-toggler"
