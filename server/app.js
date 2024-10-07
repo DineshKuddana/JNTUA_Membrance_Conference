@@ -75,15 +75,28 @@ app.post("/upload-files", upload.fields([{ name: 'abstractFile' }, { name: 'bank
     paymentMode: req.body.paymentMode,
     paymentReferenceId: req.body.paymentReferenceId,
     transactionDate: req.body.transactionDate,
-    abstractFile: req.files['abstractFile'][0].filename,
-    bankAcknowledgement: req.files['bankAcknowledgement'][0].filename,
+    abstractFile: req.files['abstractFile'] ? req.files['abstractFile'][0].filename : null,
+    bankAcknowledgement: req.files['bankAcknowledgement'] ? req.files['bankAcknowledgement'][0].filename : null,
   };
 
   try {
+    // Check if the entry with same email, mobile number or reference ID exists
+    const existingEntry = await PdfSchema.findOne({
+      email: formData.email,
+      mobileNumber: formData.mobileNumber,
+      paymentReferenceId: formData.paymentReferenceId
+    });
+
+    if (existingEntry) {
+      return res.status(400).json({ status: "Duplicate Entry Found", message: "This submission already exists in the database." });
+    }
+
+    // Insert new data if no duplicate found
     await PdfSchema.create(formData);
-    res.send({ status: "Ok" });
+    res.send({ status: "Ok", message: "Form data saved successfully." });
+
   } catch (error) {
-    res.json({ status: error.message });
+    res.status(500).json({ status: "Error", message: error.message });
   }
 });
 
@@ -93,13 +106,28 @@ app.get("/get-files", async (req, res) => {
     const data = await PdfSchema.find({});
     res.send({ status: "Ok", data });
   } catch (error) {
-    res.json({ status: error.message });
+    res.status(500).json({ status: "Error", message: error.message });
   }
 });
+
+
+
+// Add this delete route to delete a file by ID
+app.delete("/delete-file/:id", async (req, res) => {
+  try {
+    const result = await PdfSchema.findByIdAndDelete(req.params.id);
+    if (result) {
+      res.json({ status: "Ok", message: "Record deleted successfully." });
+    } else {
+      res.json({ status: "Error", message: "Record not found." });
+    }
+  } catch (error) {
+    res.json({ status: "Error", message: error.message });
+  }
+});
+
 
 // Start the server
 app.listen(5000, () => {
   console.log("Server Started on port 5000");
 });
-
-
