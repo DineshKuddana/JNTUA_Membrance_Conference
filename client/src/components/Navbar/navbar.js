@@ -107,6 +107,7 @@ const Navbar = () => {
               <Link
                 className={getNavLinkClass("/registration/form")}
                 to="/registration/form"
+                
               >
                 Registration Form
               </Link>

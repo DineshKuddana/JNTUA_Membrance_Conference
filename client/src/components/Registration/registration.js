@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 import "./registration.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import qrImage from '../../images/qr.png';
 
 function App() {
   const [formState, setFormState] = useState({
@@ -29,6 +28,9 @@ function App() {
     bankAcknowledgement: null,
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false); // State to track submission
+  const [errorMessage, setErrorMessage] = useState(""); // State to hold error messages
+
   const handleFormChange = (e) => {
     const { name, value, type, files } = e.target;
     setFormState((prevState) => ({
@@ -37,8 +39,41 @@ function App() {
     }));
   };
 
+  const validateFiles = () => {
+    const { abstractFile, bankAcknowledgement } = formState;
+    const allowedAbstractFormats = ["application/pdf"];
+    const allowedBankFormats = ["image/jpeg", "image/jpg"];
+    const maxFileSize = 1 * 1024 * 1024; // 1 MB in bytes
+
+    // Validate Abstract File
+    if (abstractFile && !allowedAbstractFormats.includes(abstractFile.type)) {
+      return "Abstract file must be a PDF.";
+    }
+    if (abstractFile && abstractFile.size > maxFileSize) {
+      return "Abstract file must be less than 1 MB.";
+    }
+
+    // Validate Bank Acknowledgement
+    if (bankAcknowledgement && !allowedBankFormats.includes(bankAcknowledgement.type)) {
+      return "Bank acknowledgement file must be a JPG or JPEG.";
+    }
+    if (bankAcknowledgement && bankAcknowledgement.size > maxFileSize) {
+      return "Bank acknowledgement file must be less than 1 MB.";
+    }
+
+    return null; // No errors
+  };
+
   const submitForm = async (e) => {
     e.preventDefault();
+
+    const validationError = validateFiles();
+    if (validationError) {
+      setErrorMessage(validationError);
+      return; // Stop submission if validation fails
+    }
+
+    setIsSubmitting(true); // Disable submit button
 
     // Create FormData instance
     const formData = new FormData();
@@ -79,12 +114,15 @@ function App() {
           bankAcknowledgement: null,
         });
         document.querySelector(".formStyle").reset();
+        setErrorMessage(""); // Clear any previous error messages
       } else {
         alert("Error submitting form: " + result.data.status);
       }
     } catch (error) {
       console.error("Submission error:", error);
       alert("An unexpected error occurred: " + error.message);
+    } finally {
+      setIsSubmitting(false); // Enable submit button after submission
     }
   };
 
@@ -92,6 +130,9 @@ function App() {
     <div className="App">
       <form className="formStyle" onSubmit={submitForm} style={{ color: "#333", backgroundColor: "#f7f9fc", padding: "20px", borderRadius: "8px", boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)" }}>
         <h4 style={{ textAlign: "center", marginBottom: "20px" }}>Registration Form</h4>
+        
+        {/* Display Error Message */}
+        {errorMessage && <div style={{ color: "#dc3545", fontWeight: "bold", marginBottom: "20px" }}>{errorMessage}</div>}
 
         {/* Prefix Dropdown */}
         <div>
@@ -178,13 +219,12 @@ function App() {
           <input type="text" name="country" readOnly value={formState.country} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} />
         </div>
 
-        {/* Mobile Number */}
+        {/* Contact Fields */}
         <div>
           <label>Mobile Number:</label>
           <input type="text" name="mobileNumber" required value={formState.mobileNumber} onChange={handleFormChange} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} />
         </div>
 
-        {/* Email */}
         <div>
           <label>Email:</label>
           <input type="email" name="email" required value={formState.email} onChange={handleFormChange} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} />
@@ -196,63 +236,47 @@ function App() {
           <input type="text" name="abstractTitle" required value={formState.abstractTitle} onChange={handleFormChange} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} />
         </div>
 
-        {/* Amount Paid */}
+        {/* Payment Fields */}
         <div>
           <label>Amount Paid:</label>
-          <input type="text" name="amountPaid" required value={formState.amountPaid} onChange={handleFormChange} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} />
+          <input type="number" name="amountPaid" required value={formState.amountPaid} onChange={handleFormChange} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} />
         </div>
 
-        {/* Payment Mode */}
         <div>
           <label>Payment Mode:</label>
           <input type="text" name="paymentMode" required value={formState.paymentMode} onChange={handleFormChange} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} />
         </div>
 
-        {/* Payment Reference ID */}
         <div>
           <label>Payment Reference ID:</label>
           <input type="text" name="paymentReferenceId" required value={formState.paymentReferenceId} onChange={handleFormChange} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} />
         </div>
 
-        {/* Transaction Date */}
         <div>
           <label>Transaction Date:</label>
           <input type="date" name="transactionDate" required value={formState.transactionDate} onChange={handleFormChange} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} />
         </div>
 
-        {/* Abstract File */}
+        {/* File Uploads */}
         <div>
-          <label>Abstract File:</label>
-          <input type="file" name="abstractFile" onChange={handleFormChange} required style={{ padding: "8px", margin: "8px 0" }} />
+          <label>Upload Abstract File (PDF):</label>
+          <input type="file" name="abstractFile" accept=".pdf" onChange={handleFormChange} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} required />
         </div>
 
-        {/* Bank Acknowledgement */}
         <div>
-          <label>Bank Acknowledgement:</label>
-          <input type="file" name="bankAcknowledgement" onChange={handleFormChange} required style={{ padding: "8px", margin: "8px 0" }} />
+          <label>Upload Bank Acknowledgement (JPEG):</label>
+          <input type="file" name="bankAcknowledgement" accept=".jpg, .jpeg" onChange={handleFormChange} style={{ padding: "8px", margin: "8px 0", borderRadius: "4px" }} required />
         </div>
 
         {/* Submit Button */}
-        <div>
-          <button type="submit" style={{ backgroundColor: "#007bff", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "4px" }}>Submit</button>
+        <div style={{ textAlign: "center" }}>
+          <button type="submit" disabled={isSubmitting} style={{ padding: "10px 20px", borderRadius: "4px", backgroundColor: "#007bff", color: "white", border: "none", cursor: isSubmitting ? "not-allowed" : "pointer" }}>
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </button>
         </div>
-
-        {/* Instructions */}
-        <div style={{ marginTop: "20px", color: "#dc3545", fontWeight: "bold" }}>
-          <p>Please note the following before submitting the form:</p>
-          <ul>
-            <li>The <strong>Bank Acknowledgement</strong> file should be in <strong>.jpg</strong> or <strong>.jpeg</strong> format and the file size should be less than <strong>1 MB</strong>.</li>
-            <li>The <strong>Abstract File</strong> should be in <strong>.pdf</strong> format and the file size should be less than <strong>1 MB</strong>.</li>
-            <li>Files that do not meet the specified formats or size limits may not be processed correctly, even if the form is submitted.</li>
-          </ul>
-        </div>
-
-        
       </form>
       <img src="/qr.png" alt="QRimage" className="qr-image" />
-
     </div>
-    
   );
 }
 
