@@ -201,21 +201,42 @@
   
 
 
-
-.footer {
+  .footer {
     display: block;
     width: 100%;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 0;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    width: 1800px;
-  }
+    background-color: #4483c6; 
+    color: #fff; 
+    padding: 10px 0; 
+    font-size: 0.9rem; 
+    margin-top: 10px; 
+    text-align: center;
+}
 
-  footer p{
-    margin: auto;
-  }
-  
+footer p {
+    margin: auto; 
+}
+
+.developer-info {
+    font-style: italic; 
+    font-weight: bold; 
+}
+
+footer a {
+    color: #ffcc00; 
+    text-decoration: underline; 
+    transition: color 0.3s ease; 
+}
+
+footer a:hover {
+    color: #ffd700; 
+    text-decoration: none; 
+}
+
+.heart {
+    color: red; 
+    font-size: 1.6rem; 
+    margin: 0 5px; 
+}
+
 
   
